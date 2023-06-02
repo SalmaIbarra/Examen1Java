@@ -5,7 +5,7 @@ public class CuentaBanco {
     public int numCuenta;
     public String Nombre;
     public String Banco;
-    public float saldo;
+    public double saldo;
 
     public CuentaBanco(int numCuenta, String Nombre, String Banco, float saldo) {
         this.numCuenta = numCuenta;
@@ -25,7 +25,7 @@ public class CuentaBanco {
         return Banco;
     }
 
-    public float getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 

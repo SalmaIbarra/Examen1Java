@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private EditText numCuenta;
+    private TextView encabezado;
     private EditText nombre;
     private EditText banco;
     private EditText saldo;
@@ -22,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Obtener referencias de los elementos del layout
-        TextView encabezadoTextView = findViewById(R.id.encabezado);
-        numCuenta = findViewById(R.id.numCuenta);
-        nombre = findViewById(R.id.nombre);
-        banco = findViewById(R.id.banco);
-        saldo = findViewById(R.id.saldo);
-        enviar = findViewById(R.id.enviar);
-        salir = findViewById(R.id.salir);
+        encabezado = findViewById(R.id.lblBanco);
+        numCuenta = findViewById(R.id.txtNumeroCuenta);
+        nombre = findViewById(R.id.txtNombre);
+        banco = findViewById(R.id.txtBanco);
+        saldo = findViewById(R.id.txtSaldo);
+        enviar = findViewById(R.id.btnEnviar);
+        salir = findViewById(R.id.btnSalir);
 
         // Configurar el click listener para el botón "Enviar"
         enviar.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 // Realizar acciones con los valores ingresados, como enviarlos a través de una API o almacenarlos en una base de datos
 
                 // Ejemplo: Mostrar los valores ingresados en el encabezado
-                encabezadoTextView.setText("Información ingresada:\n" +
+                encabezado.setText("Información ingresada:\n" +
                         "Número de cuenta: " + numCuenta + "\n" +
                         "Nombre: " + nombre + "\n" +
                         "Banco: " + banco + "\n" +

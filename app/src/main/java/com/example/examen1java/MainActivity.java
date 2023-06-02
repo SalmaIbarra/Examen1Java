@@ -1,65 +1,88 @@
-package com.example.examen1java;
+package com.example.examen1java;import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText numCuenta;
-    private TextView encabezado;
-    private EditText nombre;
-    private EditText banco;
-    private EditText saldo;
-    private Button enviar;
-    private Button salir;
+    private Button btnIngresar;
+    private Button btnSalir;
+    private EditText txtNumeroCuenta;
+    private EditText txtNombre;
+    private EditText txtBanco;
+    private EditText txtSaldo;
+
+    private String nombre = "";
+    private String banco = "";
+    private String saldo = "";
+    private String numCuenta = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Obtener referencias de los elementos del layout
-        encabezado = findViewById(R.id.lblBanco);
-        numCuenta = findViewById(R.id.txtNumeroCuenta);
-        nombre = findViewById(R.id.txtNombre);
-        banco = findViewById(R.id.txtBanco);
-        saldo = findViewById(R.id.txtSaldo);
-        enviar = findViewById(R.id.btnEnviar);
-        salir = findViewById(R.id.btnSalir);
+        iniciarComponentes();
 
-        // Configurar el click listener para el botón "Enviar"
-        enviar.setOnClickListener(new View.OnClickListener() {
+        btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Obtener los valores ingresados en los campos de texto
-                String numCuenta = numCuenta.getText().toString();
-                String nombre = nombre.getText().toString();
-                String banco = banco.getText().toString();
-                String saldo = saldo.getText().toString();
-
-                // Realizar acciones con los valores ingresados, como enviarlos a través de una API o almacenarlos en una base de datos
-
-                // Ejemplo: Mostrar los valores ingresados en el encabezado
-                encabezado.setText("Información ingresada:\n" +
-                        "Número de cuenta: " + numCuenta + "\n" +
-                        "Nombre: " + nombre + "\n" +
-                        "Banco: " + banco + "\n" +
-                        "Saldo: " + saldo);
+                btnIngresar();
             }
         });
 
-        // Configurar el click listener para el botón "Salir"
-        salir.setOnClickListener(new View.OnClickListener() {
+        btnSalir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish(); // Cierra la actividad y vuelve a la actividad anterior (o sale de la aplicación si no hay ninguna actividad anterior)
+                btnSalir();
             }
         });
     }
+
+    private void iniciarComponentes() {
+        btnIngresar = findViewById(R.id.btnEnviar);
+        btnSalir = findViewById(R.id.btnSalir);
+        txtNumeroCuenta = findViewById(R.id.txtNumeroCuenta);
+        txtNombre = findViewById(R.id.txtNombre);
+        txtBanco = findViewById(R.id.txtBanco);
+        txtSaldo = findViewById(R.id.txtSaldo);
+    }
+
+    private void btnIngresar() {
+        nombre = txtNombre.getText().toString();
+        banco = txtBanco.getText().toString();
+        saldo = txtSaldo.getText().toString();
+        numCuenta = txtNumeroCuenta.getText().toString();
+
+        if (txtNombre.getText().toString().equals("") || txtBanco.getText().toString().equals("") || txtSaldo.getText().toString().equals("") || txtNumeroCuenta.getText().toString().equals("")) {
+            Toast.makeText(getApplicationContext(), "No deje campos vacíos", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(this, CuentaBancoActivity.class);
+            intent.putExtra("nombre", nombre);
+            intent.putExtra("banco", banco);
+            intent.putExtra("saldo", saldo);
+            intent.putExtra("numCuenta", numCuenta);
+            startActivity(intent);
+        }
+    }
+
+    private void btnSalir() {
+        AlertDialog.Builder confirmar = new AlertDialog.Builder(this);
+        confirmar.setTitle("BANCO");
+        confirmar.setMessage("¿Desea Salir?");
+        confirmar.setPositiveButton("Confirmar", (dialog, which) -> finish());
+        confirmar.setNegativeButton("Cancelar", (dialog, which) -> {
+            // No hacer nada
+        });
+
+        confirmar.show();
+    }
 }
 
-}
+
+

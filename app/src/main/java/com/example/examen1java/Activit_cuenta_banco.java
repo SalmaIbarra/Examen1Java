@@ -4,7 +4,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CuentaBancoActivity extends AppCompatActivity {
+public class Activit_cuenta_banco extends AppCompatActivity {
 
     private TextView lblNombre;
     private TextView lblSaldo;
@@ -33,6 +33,3 @@ public class CuentaBancoActivity extends AppCompatActivity {
     }
 }
 
-
-    }
-}
